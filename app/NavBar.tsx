@@ -1,5 +1,6 @@
 'use client'
 
+import { Skeleton } from '@/app/components'
 import Link from 'next/link'
 import React from 'react'
 import { AiFillBug } from 'react-icons/ai'
@@ -69,7 +70,7 @@ const NavLinks = () => {
 const AuthStatus = () => {
   const { status, data: session } = useSession()
 
-  if (status === 'loading') return null
+  if (status === 'loading') return <Skeleton width='3rem' />
 
   if (status === 'unauthenticated') {
     return (
