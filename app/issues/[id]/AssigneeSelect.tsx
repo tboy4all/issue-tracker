@@ -21,7 +21,7 @@ const AssigneeSelect = () => {
 
   if (isLoading) return <Skeleton />
 
-  if (error) return null``
+  if (error) return null
 
   // const [users, setUsers] = useState<User[]>([])
 
