@@ -15,13 +15,12 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   if (error) return null
 
   const assignIssue = (userId: string) => {
-    axios
-      .patch('/api/issues/' + issue.id, {
-        assignedToUserId: userId || null,
-      })
-      .catch(() => {
-        toast.error('Changes could not be saved')
-      })
+    axios.patch('/api/issues/' + issue.id, {
+      assignedToUserId: userId || null,
+    })
+    // .catch(() => {
+    //   toast.error('Changes could not be saved')
+    // })
   }
 
   // const [users, setUsers] = useState<User[]>([])
@@ -38,14 +37,14 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   return (
     <>
       <Select.Root
-        defaultValue={issue.assignedToUserId || ''}
+        defaultValue={issue.assignedToUserId || null || ''}
         onValueChange={assignIssue}
       >
         <Select.Trigger placeholder='Assign ...'></Select.Trigger>
         <Select.Content>
           <Select.Group>
             <Select.Label>Suggestions</Select.Label>
-            <Select.Item value={null}>Unassigned</Select.Item>
+            <Select.Item value={null || ''}>Unassigned</Select.Item>
             {users?.map((user) => (
               <Select.Item key={user.id} value={user.id}>
                 {user.name}
