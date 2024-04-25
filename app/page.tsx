@@ -6,6 +6,7 @@ import LatestIssues from './LatestIssues'
 
 import { PrismaClient } from '@prisma/client'
 import React from 'react'
+import { Metadata } from 'next'
 
 const prisma = new PrismaClient()
 
@@ -30,4 +31,9 @@ export default async function Home() {
       <LatestIssues />
     </Grid>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Issue Tracker - Dashboard',
+  description: 'View a summary of project issues',
 }
