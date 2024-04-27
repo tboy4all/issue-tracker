@@ -15,36 +15,26 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   if (error) return null
 
   const assignIssue = (userId: string) => {
-    axios.patch('/api/issues/' + issue.id, {
-      assignedToUserId: userId || null,
-    })
-    // .catch(() => {
-    //   toast.error('Changes could not be saved')
-    // })
+    axios
+      .patch('/api/issues/' + issue.id, {
+        assignedToUserId: userId || null,
+      })
+      .catch(() => {
+        toast.error('Changes could not be saved.')
+      })
   }
-
-  // const [users, setUsers] = useState<User[]>([])
-
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     const { data } = await axios.get<User[]>('/api/users')
-  //     setUsers(data)
-  //   }
-
-  //   fetchUsers()
-  // }, [])
 
   return (
     <>
       <Select.Root
-        defaultValue={issue.assignedToUserId || null || ''}
+        defaultValue={issue.assignedToUserId || ''}
         onValueChange={assignIssue}
       >
-        <Select.Trigger placeholder='Assign ...'></Select.Trigger>
+        <Select.Trigger placeholder='Assign...' />
         <Select.Content>
           <Select.Group>
             <Select.Label>Suggestions</Select.Label>
-            <Select.Item value={null || ''}>Unassigned</Select.Item>
+            <Select.Item value='option'>Unassigned</Select.Item>
             {users?.map((user) => (
               <Select.Item key={user.id} value={user.id}>
                 {user.name}
@@ -62,7 +52,7 @@ const useUsers = () =>
   useQuery<User[]>({
     queryKey: ['users'],
     queryFn: () => axios.get('/api/users').then((res) => res.data),
-    staleTime: 60 * 1000, // 60s
+    staleTime: 60 * 1000, //60s
     retry: 3,
   })
 
