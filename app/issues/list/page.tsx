@@ -9,7 +9,6 @@ const prisma = new PrismaClient()
 
 interface Props {
   searchParams: IssueQuery
-  issues: Issue[]
 }
 
 const IssuePage = async ({ searchParams }: Props) => {
